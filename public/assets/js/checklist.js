@@ -100,11 +100,13 @@ function encodeImageFileAsURL2(element) {
         var file = element.files[i];
         var reader = new FileReader();
         reader.onloadend = function (){
-            fileArray.push(this.result)
+            string = this.result
+            console.log(string)
+            // fileArray.push(toString(this.result))
         }
         reader.readAsDataURL(file)
     }    
-    console.log(fileArray[0])
+    // console.log(fileArray)
 }
 
 function createPDF(){
