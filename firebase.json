@@ -1,6 +1,5 @@
 {
   "hosting": {
-    "site": "i-checklist",
     "public": "public",
     "ignore": [
       "firebase.json",

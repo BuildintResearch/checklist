@@ -387,7 +387,7 @@ section {
 	width:100%;
 	margin:auto;
 	max-width:525px;
-	min-height:2150px;
+	min-height:1800px;
 	position:relative;
 	box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
 }
@@ -563,7 +563,7 @@ font-size: 13px;
   background-color: #000;
 }
 
-.add_site_dropdown .add-select,.atm-form .atm_id_dropdown .form-select2, .atm-form .atm_name_dropdown .form-select2, #datetime, #datetime2, .branch-form .branch_name_dropdown .form-select3, .branch-form .branch_id_dropdown .form-select3, .history_type_dropdown .history-select, .history_name_dropdown .history-code-select, .history_code_dropdown .history-code-select {
+.add_site_dropdown .add-select,.atm-form .atm_id_dropdown .form-select2, .atm-form .atm_name_dropdown .form-select2, #datetime, #datetime1,#datetime2, .branch-form .branch_name_dropdown .form-select3, .branch-form .branch_id_dropdown .form-select3, .history_type_dropdown, .history_code_dropdown .history-select, .history_name_dropdown .history-code-select, .history_code_dropdown .history-code-select {
   border:solid black;
   color: rgb(0, 0, 0);
 	padding:10px 20px;
