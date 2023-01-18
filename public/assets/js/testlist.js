@@ -1,17 +1,3 @@
-// firebase config here
-const firebaseConfig = {
-    apiKey: "AIzaSyCtFlIgLHOvliDQpsVW0YnZJZ7xVANICpk",
-    authDomain: "checklist-379ea.firebaseapp.com",
-    databaseURL: "https://checklist-379ea-default-rtdb.asia-southeast1.firebasedatabase.app",
-    projectId: "checklist-379ea",
-    storageBucket: "checklist-379ea.appspot.com",
-    messagingSenderId: "248915298508",
-    appId: "1:248915298508:web:4424f89a61e04ba9e75a69",
-    measurementId: "G-YR85WETH2H"
-  };
-firebase.initializeApp(firebaseConfig);
-let test_ref = firebase.database().ref("testing_report")
-
 function hw_test(){
     mbsn = document.getElementById('mbsn').value
     currdate = document.getElementById('datetime').value
@@ -48,7 +34,6 @@ function hw_test(){
     atmch = document.getElementById('atmch').value
     atmkwhh = document.getElementById('atmkwhh').value
 
-    // checkboxes
     door = document.getElementById('doorh').checked
     wifi  = document.getElementById('wifih').checked
     star = document.getElementById('starh').checked
@@ -73,74 +58,18 @@ function hw_test(){
 
     notes = document.getElementById('notesh').value
     testedby = document.getElementById('testbyh').value
-
-    // push to firebase
-    test_ref.child(mbsn).child('date').set(currdate)
-    test_ref.child(mbsn).child('hw').child('wifiname').set(wifiname)
-    test_ref.child(mbsn).child('hw').child('macid').set(macid)
-    test_ref.child(mbsn).child('hw').child('deviceid').set(deviceid)
-    test_ref.child(mbsn).child('hw').child('rpln').set(rplnh)
-    test_ref.child(mbsn).child('hw').child('rple').set(rpleh)
-    test_ref.child(mbsn).child('hw').child('upsln').set(upslnh)
-    test_ref.child(mbsn).child('hw').child('upsle').set(upsleh)
-    test_ref.child(mbsn).child('hw').child('temp').set(temph)
-    test_ref.child(mbsn).child('hw').child('humidity').set(humidityh)
-    test_ref.child(mbsn).child('hw').child('batteryvoltage').set(bvh)
-    test_ref.child(mbsn).child('hw').child('door').set(door)
-    test_ref.child(mbsn).child('hw').child('wifi').set(wifi)
-    test_ref.child(mbsn).child('hw').child('star').set(star)
-    test_ref.child(mbsn).child('hw').child('beep').set(beep)
-    test_ref.child(mbsn).child('hw').child('presence').set(presence)
-
-    test_ref.child(mbsn).child('hw').child('ac1').child('watts').set(ac1wh)
-    test_ref.child(mbsn).child('hw').child('ac1').child('current').set(ac1ch)
-    test_ref.child(mbsn).child('hw').child('ac1').child('kwh').set(ac1kwhh)
-    test_ref.child(mbsn).child('hw').child('ac1').child('storing').set(ac1store)
-    test_ref.child(mbsn).child('hw').child('ac2').child('watts').set(ac2wh)
-    test_ref.child(mbsn).child('hw').child('ac2').child('current').set(ac2ch)
-    test_ref.child(mbsn).child('hw').child('ac2').child('kwh').set(ac2kwhh)
-    test_ref.child(mbsn).child('hw').child('ac2').child('storing').set(ac2store)
-    test_ref.child(mbsn).child('hw').child('lobby').child('watts').set(lobbywh)
-    test_ref.child(mbsn).child('hw').child('lobby').child('current').set(lobbych)
-    test_ref.child(mbsn).child('hw').child('lobby').child('kwh').set(lobbykwhh)
-    test_ref.child(mbsn).child('hw').child('lobby').child('storing').set(lobbystore)
-    test_ref.child(mbsn).child('hw').child('signage').child('watts').set(signagewh)
-    test_ref.child(mbsn).child('hw').child('signage').child('current').set(signagech)
-    test_ref.child(mbsn).child('hw').child('signage').child('kwh').set(signagekwhh)
-    test_ref.child(mbsn).child('hw').child('signage').child('storing').set(signagestore)
-    test_ref.child(mbsn).child('hw').child('dvr').child('watts').set(dvrwh)
-    test_ref.child(mbsn).child('hw').child('dvr').child('current').set(dvrch)
-    test_ref.child(mbsn).child('hw').child('dvr').child('kwh').set(dvrkwhh)
-    test_ref.child(mbsn).child('hw').child('dvr').child('storing').set(dvrstore)
-    test_ref.child(mbsn).child('hw').child('ups').child('watts').set(upswh)
-    test_ref.child(mbsn).child('hw').child('ups').child('current').set(upsch)
-    test_ref.child(mbsn).child('hw').child('ups').child('kwh').set(upskwhh)
-    test_ref.child(mbsn).child('hw').child('ups').child('storing').set(upsstore)
-    test_ref.child(mbsn).child('hw').child('atm').child('watts').set(atmwh)
-    test_ref.child(mbsn).child('hw').child('atm').child('current').set(atmch)
-    test_ref.child(mbsn).child('hw').child('atm').child('kwh').set(atmkwhh)
-    test_ref.child(mbsn).child('hw').child('atm').child('storing').set(atmstore)
-
-
-
-
-    test_ref.child(mbsn).child('hw').child('relay').child('ac1').set(ac1relay)
-    test_ref.child(mbsn).child('hw').child('relay').child('ac2').set(ac2relay)
-    test_ref.child(mbsn).child('hw').child('relay').child('lobby').set(lobbyrelay)
-    test_ref.child(mbsn).child('hw').child('relay').child('signage').set(signagerelay)
-    test_ref.child(mbsn).child('hw').child('relay').child('vsat').set(vsatrelay)
-    test_ref.child(mbsn).child('hw').child('relay').child('router').set(routerrelay)
-    test_ref.child(mbsn).child('hw').child('relay').child('atm').set(atmrelay)
-    test_ref.child(mbsn).child('hw').child('relay').child('spare').set(sparerelay)
-
-    test_ref.child(mbsn).child('hw').child('notes').set(notes)
-    test_ref.child(mbsn).child('hw').child('testedby').set(testedby)
-
-
+    console.log('hi')
+    fetch('http://192.168.0.194:3000/form',{
+        method:'POST',
+        headers:{"Content-Type": "application/json",
+                "Access-Control-Allow-Origin":"*"},
+        body:'{"table":"test_hw","mbsn":"'+mbsn+'","currdate":"'+currdate+'","wifiname":"'+wifiname+'","macid":"'+macid+'","deviceid":"'+deviceid+'","rplnh":"'+rplnh+'","rpleh":"'+rpleh+'","upslnh":"'+upslnh+'","upsleh":"'+upsleh+'","temph":"'+temph+'","humidityh":"'+humidityh+'","battery_volt":"'+bvh+'","ac1watt":"'+ac1wh+'","ac1current":"'+ac1ch+'","ac1kwh":"'+ac1kwhh+'","ac2watt":"'+ac2wh+'","ac2current":"'+ac2ch+'","ac2kwh":"'+ac2kwhh+'","lbywatt":"'+lobbywh+'","lbycurrent":"'+lobbych+'","lbykwh":"'+lobbykwhh+'","signwatt":"'+signagewh+'","signcurrent":"'+signagech+'","signkwh":"'+signagekwhh+'","dvrwatt":"'+dvrwh+'","dvrcurrent":"'+dvrch+'","dvrkwh":"'+dvrkwhh+'","upswatt":"'+upswh+'","upscurrent":"'+upsch+'","upskwh":"'+upskwhh+'","atmwatt":"'+atmwh+'","atmcurrent":"'+atmch+'","atmkwh":"'+atmkwhh+'","door":"'+door+'","wifi":"'+wifi+'","star":"'+star+'","beep":"'+beep+'","presence":"'+presence+'","ac1store":"'+ac1store+'","ac2store":"'+ac2store+'","lbystore":"'+lobbystore+'","signstore":"'+signagestore+'","dvrstore":"'+dvrstore+'","upsstore":"'+upsstore+'","atmstore":"'+atmstore+'","ac1relay":"'+ac1relay+'","ac2relay":"'+ac2relay+'","lbyrelay":"'+lobbyrelay+'","signrelay":"'+signagerelay+'","vsatrelay":"'+vsatrelay+'","routerrelay":"'+routerrelay+'","atmrelay":"'+atmrelay+'","sparerelay":"'+sparerelay+'","notes":"'+notes+'","testedby":"'+testedby+'"}'
+    })
 }
 
 function data_test(){
     mbsn1 = document.getElementById('mbsn1').value
+    currdate1 = document.getElementById('datetime').value
     rplnd = document.getElementById('rplnd').value
     rpled = document.getElementById('rpled').value
     upslnd = document.getElementById('upslnd').value
@@ -194,60 +123,11 @@ function data_test(){
 
     notesd = document.getElementById('notesd').value
     testedbyd = document.getElementById('testbyd').value
-
-
-    // push to firebase     
-    test_ref.child(mbsn1).child('data').child('rpln').set(rplnd)
-    test_ref.child(mbsn1).child('data').child('rple').set(rpled)
-    test_ref.child(mbsn1).child('data').child('upsln').set(upslnd)
-    test_ref.child(mbsn1).child('data').child('upsle').set(upsled)
-    test_ref.child(mbsn1).child('data').child('temp').set(tempd)
-    test_ref.child(mbsn1).child('data').child('humidity').set(humidityd)
-    test_ref.child(mbsn1).child('data').child('batteryvoltage').set(bvd)
-    test_ref.child(mbsn1).child('data').child('door').set(doord)
-    test_ref.child(mbsn1).child('data').child('wifi').set(wifid)
-    test_ref.child(mbsn1).child('data').child('star').set(stard)
-    test_ref.child(mbsn1).child('data').child('presence').set(presenced)
-
-    test_ref.child(mbsn1).child('data').child('ac1').child('watts').set(ac1wd)
-    test_ref.child(mbsn1).child('data').child('ac1').child('current').set(ac1cd)
-    test_ref.child(mbsn1).child('data').child('ac1').child('kwh').set(ac1kwhd)
-    test_ref.child(mbsn1).child('data').child('ac1').child('storing').set(ac1stored)
-    test_ref.child(mbsn1).child('data').child('ac2').child('watts').set(ac2wd)
-    test_ref.child(mbsn1).child('data').child('ac2').child('current').set(ac2cd)
-    test_ref.child(mbsn1).child('data').child('ac2').child('kwh').set(ac2kwhd)
-    test_ref.child(mbsn1).child('data').child('ac2').child('storing').set(ac2stored)
-    test_ref.child(mbsn1).child('data').child('lobby').child('watts').set(lobbywd)
-    test_ref.child(mbsn1).child('data').child('lobby').child('current').set(lobbycd)
-    test_ref.child(mbsn1).child('data').child('lobby').child('kwh').set(lobbykwhd)
-    test_ref.child(mbsn1).child('data').child('lobby').child('storing').set(lobbystored)
-    test_ref.child(mbsn1).child('data').child('signage').child('watts').set(signagewd)
-    test_ref.child(mbsn1).child('data').child('signage').child('current').set(signagecd)
-    test_ref.child(mbsn1).child('data').child('signage').child('kwh').set(signagekwhd)
-    test_ref.child(mbsn1).child('data').child('signage').child('storing').set(signagestored)
-    test_ref.child(mbsn1).child('data').child('dvr').child('watts').set(dvrwd)
-    test_ref.child(mbsn1).child('data').child('dvr').child('current').set(dvrcd)
-    test_ref.child(mbsn1).child('data').child('dvr').child('kwh').set(dvrkwhd)
-    test_ref.child(mbsn1).child('data').child('dvr').child('storing').set(dvrstored)
-    test_ref.child(mbsn1).child('data').child('ups').child('watts').set(upswd)
-    test_ref.child(mbsn1).child('data').child('ups').child('current').set(upscd)
-    test_ref.child(mbsn1).child('data').child('ups').child('kwh').set(upskwhd)
-    test_ref.child(mbsn1).child('data').child('ups').child('storing').set(upstored)
-    test_ref.child(mbsn1).child('data').child('atm').child('watts').set(atmwd)
-    test_ref.child(mbsn1).child('data').child('atm').child('current').set(atmcd)
-    test_ref.child(mbsn1).child('data').child('atm').child('kwh').set(atmkwhd)
-    test_ref.child(mbsn1).child('data').child('atm').child('storing').set(atmstored)
-
-    test_ref.child(mbsn1).child('data').child('relay').child('ac1').set(ac1relayd)
-    test_ref.child(mbsn1).child('data').child('relay').child('ac2').set(ac2relayd)
-    test_ref.child(mbsn1).child('data').child('relay').child('lobby').set(lobbyrelayd)
-    test_ref.child(mbsn1).child('data').child('relay').child('signage').set(signagerelayd)
-    test_ref.child(mbsn1).child('data').child('relay').child('vsat').set(vsatrelayd)
-    test_ref.child(mbsn1).child('data').child('relay').child('router').set(routerrelayd)
-    test_ref.child(mbsn1).child('data').child('relay').child('atm').set(atmrelayd)
-    test_ref.child(mbsn1).child('data').child('relay').child('spare').set(sparerelayd)
     
-    test_ref.child(mbsn1).child('data').child('notes').child(notesd)
-    test_ref.child(mbsn1).child('data').child('testedby').child(testedbyd)
-
+    fetch('http://192.168.0.194:3000/form',{
+        method:'POST',
+        headers:{"Content-Type": "application/json",
+                "Access-Control-Allow-Origin":"*"},
+        body:'{"table":"test_sw","mbsn":"'+mbsn1+'","currdate":"'+currdate1+'","raw_powerln":"'+rplnd+'","raw_powerle":"'+rpled+'","ups_powerln":"'+upslnd+'","ups_powerle":"'+upsled+'","temp":"'+tempd+'","humidity":"'+humidityd+'","battery_volt":"'+bvd+'","ac1watt":"'+ac1wd+'","ac1current":"'+ac1cd+'","ac1kwh":"'+ac1kwhd+'","ac2watt":"'+ac2wd+'","ac2current":"'+ac2cd+'","ac2kwh":"'+ac2kwhd+'","lbywatt":"'+lobbywd+'","lbycurrent":"'+lobbycd+'","lbykwh":"'+lobbykwhd+'","signwatt":"'+signagewd+'","signcurrent":"'+signagecd+'","signkwh":"'+signagekwhd+'","dvrwatt":"'+dvrwd+'","dvrcurrent":"'+dvrcd+'","dvrkwh":"'+dvrkwhd+'","upswatt":"'+upswd+'","upscurrent":"'+upscd+'","upskwh":"'+upskwhd+'","atmwatt":"'+atmwd+'","atmcurrent":"'+atmcd+'","atmkwh":"'+atmkwhd+'","door":"'+doord+'","wifi":"'+wifid+'","star":"'+stard+'","presence":"'+presenced+'","ac1store":"'+ac1stored+'","ac2store":"'+ac2stored+'","lbystore":"'+lobbystored+'","signstore":"'+signagestored+'","dvrstore":"'+dvrstored+'","upsstore":"'+upstored+'","atmstore":"'+atmstored+'","ac1relay":"'+ac1relayd+'","ac2relay":"'+ac2relayd+'","lbyrelay":"'+lobbyrelayd+'","signrelay":"'+signagerelayd+'","vsatrelay":"'+vsatrelayd+'","routerrelay":"'+routerrelayd+'","atmrelay":"'+atmrelayd+'","sparerelay":"'+sparerelayd+'","notes":"'+notesd+'","testedby":"'+testedbyd+'"}'
+    })
 }
