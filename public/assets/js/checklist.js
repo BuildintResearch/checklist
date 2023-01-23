@@ -1,3 +1,5 @@
+let sign_img_list = []
+let site_img_list = ""
 window.onload = function get_atmcode(){
     atmid_wrapper = document.getElementById('atmid_list')
     atmcity_wrapper = document.getElementById('atmname_list')
@@ -150,9 +152,12 @@ function storedata(){
         headers:{"Content-Type": "application/json",
                 "Access-Control-Allow-Origin":"*"},
         // body:'{"atmcity":"'+atmcity+'","atmcode:""'+atmcode+'"}',
-        body:'{"table":"survey","atmcity":"'+atmcity+'","currdate":"'+currdate+'","atmcode":"'+atmcode+'","atmaddr":"'+atmaddr+'","atmo_name":"'+atmoname+'","atmo_contact":"'+atmcontact+'","atmo_mail":"'+atmo_mail+'","site_person_name":"'+site_person+'","site_person_contact":"'+site_person_contact+'","ac1_type":"'+ac1_type+'","ac1_brand":"'+ac1_brand+'","ac1_capacity":"'+ac1_capacity+'","ac1_ir":"'+ac1_comm+'","ac1_status":"'+ac1_status+'","ac2_type":"'+ac2_type+'","ac2_brand":"'+ac2_brand+'","ac2_capacity":"'+ac2_capacity+'","ac2_ir":"'+ac2_comm+'","ac2_status":"'+ac2_status+'","ups_model":"'+ups_model+'","ups_capacity":"'+ups_capacity+'","ups_battery":"'+ups_batteries+'","ups_avr":"'+ups_avr+'","ups_trans":"'+ups_trans+'","ups_servo":"'+ups_servo+'","ups_batt_volt":"'+ups_batt_volt+'","esld":"'+esld+'","npanels":"'+npanels+'","lobby_lights":"'+lobby_light+'","n_light":"'+n_light+'","signage_status":"'+signage_status+'","signage_time":"'+signage_time+'","dvr_model":"'+dvr_model+'","dvr_cam_no":"'+dvr_cam_no+'","dvr_hdd":"'+dvr_hdd+'","door_status":"'+door_status+'","door_stopper":"'+door_stoppper+'","atm_count":"'+atm_count+'","site_img":"'+site_image+'","meter_eb":"'+meter_eb+'","meter_type":"'+meter_type+'","signage_timer_type":"'+signage_timer_type+'","ac_timer_type":"'+ac_timer_type+'","notes":"'+notes+'"}'
+        body:'{"table":"survey","atmcity":"'+atmcity+'","currdate":"'+currdate+'","atmcode":"'+atmcode+'","atmaddr":"'+atmaddr+'","atmo_name":"'+atmoname+'","atmo_contact":"'+atmcontact+'","atmo_mail":"'+atmo_mail+'","site_person_name":"'+site_person+'","site_person_contact":"'+site_person_contact+'","ac1_type":"'+ac1_type+'","ac1_brand":"'+ac1_brand+'","ac1_capacity":"'+ac1_capacity+'","ac1_ir":"'+ac1_comm+'","ac1_status":"'+ac1_status+'","ac2_type":"'+ac2_type+'","ac2_brand":"'+ac2_brand+'","ac2_capacity":"'+ac2_capacity+'","ac2_ir":"'+ac2_comm+'","ac2_status":"'+ac2_status+'","ups_model":"'+ups_model+'","ups_capacity":"'+ups_capacity+'","ups_battery":"'+ups_batteries+'","ups_avr":"'+ups_avr+'","ups_trans":"'+ups_trans+'","ups_servo":"'+ups_servo+'","ups_batt_volt":"'+ups_batt_volt+'","esld":"'+esld+'","npanels":"'+npanels+'","lobby_lights":"'+lobby_light+'","n_light":"'+n_light+'","signage_status":"'+signage_status+'","signage_time":"'+signage_time+'","dvr_model":"'+dvr_model+'","dvr_cam_no":"'+dvr_cam_no+'","dvr_hdd":"'+dvr_hdd+'","door_status":"'+door_status+'","door_stopper":"'+door_stoppper+'","atm_count":"'+atm_count+'","site_img":"'+site_image+'","meter_eb":"'+meter_eb+'","meter_type":"'+meter_type+'","signage_timer_type":"'+window.btoa(signage_timer_type)+'","ac_timer_type":"'+ac_timer_type+'","notes":"'+notes+'","sign_imgs":"'+sign_img_list+'","site_img":"'+site_img_list+'"}'
+        
     })
 }
+
+
 
 async function storedata1(){
     var x = document.getElementById('option-select')
@@ -232,8 +237,71 @@ async function storedata1(){
         body:'{"table":"service","ac1s":"'+ac1s+'","ac2s":"'+ac2s+'","lobbys":"'+lobbys+'","signages":"'+signages+'","dvrs":"'+dvrs+'","vsats":"'+vsats+'","tahs":"'+tahs+'","occus":"'+occus+'","doors":"'+doors+'","earthings":"'+earthings+'","upss":"'+upss+'","iatms":"'+iatms+'","routers":"'+routers+'","batterys":"'+batterys+'","atmms":"'+atmms+'","ac1r":"'+ac1r+'","ac2r":"'+ac2r+'","lobbyr":"'+lobbyr+'","signager":"'+signager+'","dvrr":"'+dvrr+'","vsatr":"'+vsatr+'","tahr":"'+tahr+'","ocr":"'+or+'","dsr":"'+dsr+'","er":"'+er+'","upsr":"'+upsr+'","iatmr":"'+iatmr+'","routerr":"'+routerr+'","br":"'+br+'","atmmr":"'+atmmr+'","atmid":"'+atmid+'","atmc":"'+atmc+'","currdate1":"'+currdate1+'","mgr_name":"'+mgr_name+'","mgr_con":"'+mgr_con+'","mgr_email":"'+mgr_email+'","site_prs":"'+site_prs+'","site_p_con":"'+site_p_con+'","intime":"'+intime+'","outtime":"'+outtime+'","problem":"'+problem+'","issue":"'+issue+'","maint":"'+maint+'","notes1":"'+notes1+'"}'
             })
     }
-    
 }   
+
+document.getElementById("atm_sign_file").addEventListener('change', (e)=>{
+    var file = e.target.files[0];
+    var reader = new FileReader();
+    reader.onloadend = () => {
+    var base64String = reader.result
+        .replace('data:', '')
+        .replace(/^.+,/, '');
+    // console.log(base64String);
+    sign_img_list.push(base64String)
+    console.log(sign_img_list)
+    };
+    reader.readAsDataURL(file);
+});
+
+document.getElementById("atm_site_file").addEventListener('change',(e) => {
+    site_img_list = ""
+    element = document.getElementById("atm_site_file")
+    for(i=0;i<element.files.length;i++){
+        img2base64(element.files[i])
+   }
+   console.log(site_img_list)
+})
+
+function img2base64(img){
+    var file = img;
+    var reader = new FileReader()
+    reader.onloadend = () => {
+        var base64 = reader.result
+            .replace('data:', '')
+            .replace(/^.+,/, '');
+        // console.log(base64+";")
+        base64 = base64+"**"
+        site_img_list += base64
+    }
+    reader.readAsDataURL(file)
+}
+
+
+// for(var i=0; i<site_element.files.length; i++){
+//     var storage = firebase.storage().ref('site_images/'+site_element.files[i].name)
+//     var upload = await storage.put(site_element.files[i]).then((snapshot) => {
+//         snapshot.ref.getDownloadURL().then(
+//             function(downloadURL){
+//                 // get download URL
+//                 console.log(downloadURL)
+//                 durl = downloadURL
+//                 site_img_list.push(durl)
+//                 survey_ref.child(atmcode).child('site_img_'+ct).set(downloadURL)
+//                 ct+=1
+//             }
+//         )
+//     })
+// }
+
+// // function get_sign(element){
+// //     var file = element.files[0];
+// //     var reader = new FileReader();
+// //     reader.onloadend = function() {
+// //         localStorage.setItem('signimage', reader.result)    
+// //     }
+// //     reader.readAsDataURL(file);
+// // }
+
 
 // // firebase config here
 // const firebaseConfig = {

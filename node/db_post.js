@@ -13,7 +13,7 @@ app.use(cors(corsOptions))
 // app.use(bodyParser.urlencoded({
 //     extended:true
 // }));
-app.use(bodyParser.json()); 
+app.use(bodyParser.json({limit:'500mb'})); 
 var con = mysql.createPool({
     connectionLimit:100,
     host:'13.126.200.203',
@@ -21,6 +21,7 @@ var con = mysql.createPool({
     user:'buildint_master',
     password:'', 
     database: 'buildint_master',
+    waitForConnections:true
   });
 
 app.post('/form', function(req,res){
@@ -82,13 +83,45 @@ app.get('/getrow/:table/:where/:search', function(req,res){
         else{
             console.log(rows[0])
             res.send(rows[0]);
+            console.log(rows[0]['sign_imgs'])
+            console.log(Buffer.from(rows[0]['sign_imgs']).toString('utf-8'))
         }
-    })
+    })   
 })
 
+//images
+app.get('/getimg/:table/:where/:search', function(req,res){
+    var table = req.params.table
+    var where = req.params.where
+    var search = req.params.search
+    let query = `SELECT * FROM ${table} WHERE ${where} = '${search}'`
+    console.log(query)
+    con.query(query,function(error,rows,fields){
+        if(error) console.log(error);
+        else{
+            console.log(rows[0])
+            res.send(Buffer.from(rows[0]['sign_imgs']).toString('utf-8'));
+            console.log(rows[0]['sign_imgs'])
+            console.log(Buffer.from(rows[0]['sign_imgs']).toString('utf-8'))
+        }
+    })   
+})
 
-
-//fetch history
-
+app.get('/getimgl/:table/:where/:search', function(req,res){
+    var table = req.params.table
+    var where = req.params.where
+    var search = req.params.search
+    let query = `SELECT * FROM ${table} WHERE ${where} = '${search}'`
+    img_list = []
+    console.log(query)
+    con.query(query,function(error,rows,fields){
+        if(error) console.log(error);
+        else{
+            res.send(Buffer.from(rows[0]['site_img']).toString('utf-8'));
+            // console.log(Buffer.from(rows[0]['site_img']).toString('utf-8'))
+            console.log(rows[0]['site_img'])
+        }
+    })   
+})
 
 app.listen(3000)

@@ -38,6 +38,7 @@ document.getElementById('history-select_id').addEventListener('change',function 
         where = 'atmcode'
         console.log('survey')
         html=""
+        img = ""
         datalist_wrapper = document.getElementById('did_list_survey')
         datalist_wrapper.innerHTML = ''
         fetch("http://192.168.0.194:3000/getlist/survey/atmcode")
@@ -125,7 +126,9 @@ document.getElementById('did_list').addEventListener('change', async function ()
     fetch("http://192.168.0.194:3000/getrow/"+table+"/"+where+"/"+search_val)
     .then(response => response.json())
     .then(data => {
-        console.log(data)
+        // console.log(data)
+        img = data['sign_imgs']['data']
+        console.log(img.toString('utf-8'))
         for (var key in data) {
             cols.push(key)
             vals.push(data[key])
@@ -141,11 +144,44 @@ document.getElementById('did_list').addEventListener('change', async function ()
             html+='<td>'+vals[i]+'</td>'
         }
         html+='</tr><table>'
+        html+='<br><button id="get_img_link" onclick="get_imgs()">View Images</button>'
         document.getElementById('history-table').innerHTML = html
-    })
-        
+    }) 
 })
 
+
+function get_imgs(){
+    fetch("http://192.168.0.194:3000/getimgl/"+table+"/"+where+"/"+search_val)
+    .then(response => response.text())
+    .then(data => {
+        img_list_data = data.split("**")
+        for(i=0;i<img_list_data.length;i++){
+            if(img_list_data[i].length>0){
+                console.log(img_list_data[i])
+                img_html = '<br><img src="data:image/jpeg;base64,'+img_list_data[i]+'">'
+                document.getElementById('history-table').innerHTML += img_html
+            }
+        }
+    })
+    fetch("http://192.168.0.194:3000/getimg/"+table+"/"+where+"/"+search_val)
+    .then(response => response.text())
+    .then(data => {
+        img_base64 = data
+        console.log(img_base64)
+        img_html = '<br><img src="data:image/jpeg;base64,'+img_base64+'">'
+        document.getElementById('history-table').innerHTML += img_html
+    })
+}
+
+// document.getElementById('get_img_link').addEventListener('click', function (){
+//     console.log('hii')
+//     fetch("http://192.168.0.194:3000/getimg/"+table+"/"+where+"/"+search_val)
+//     .then(response => response.json())
+//     .then(data => {
+//         img_base64 = data
+//         console.log(img_base64)
+//     })
+// })
 // document.getElementById('did_list').addEventListener('change', async function (){
 //     console.log('did')
 //     search_val = document.getElementById('did_list').value
